@@ -49,16 +49,20 @@ class FeatureEngineer(BaseEstimator, TransformerMixin):
             X['Day'] = (X['Time'] / 86400).astype(int)
             logger.debug("Created time-based features")
         
-        # Amount transformations
+        # Amount-based features
         if 'Amount' in X.columns:
             X['Amount_log'] = np.log1p(X['Amount'])
-            X['Amount_bin'] = pd.cut(
+            
+            # Create amount bins with NaN handling
+            amount_bins = pd.cut(
                 X['Amount'],
                 bins=[0, 10, 50, 100, 500, float('inf')],
                 labels=[0, 1, 2, 3, 4]
-            ).astype(int)
+            )
+            X['Amount_bin'] = amount_bins.fillna(0).astype(int)  # Fill NaN with 0
+            
             logger.debug("Created amount-based features")
-        
+                
         # Interaction features between PCA components
         v_features = [col for col in X.columns if col.startswith('V')]
         if len(v_features) >= 2:
