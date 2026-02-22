@@ -1,6 +1,6 @@
 # Fraud Detection System
 
-Production-ready fraud detection system using XGBoost and FastAPI. Achieves 98.6% ROC-AUC and 88% recall on the Credit Card Fraud Detection dataset.
+Production-ready fraud detection system using XGBoost. Achieves 98.6% ROC-AUC and 88% recall on the Credit Card Fraud Detection dataset.
 
 ## 🎯 Key Features
 
